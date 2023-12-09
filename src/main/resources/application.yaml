@@ -1,0 +1,21 @@
+spring:
+   application:
+      name: "two-sum"
+   active:
+      profile: local
+---
+spring:
+   config:
+      activate:
+         on-profile: local
+two-sum-config:
+   algorithm: "brute-force"
+   url: "http://localhost/test-random.php"
+---
+spring:
+   config:
+      activate:
+         on-profile: cloud
+two-sum-config:
+   algorithm: "brute-force"
+   url: "http://php-random/test-random.php"

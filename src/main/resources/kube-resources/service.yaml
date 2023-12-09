@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: two-sum
+  name: two-sum
+  namespace: default
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    run: two-sum
+  sessionAffinity: None
+  type: ClusterIP
