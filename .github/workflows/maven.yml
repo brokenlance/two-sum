@@ -33,7 +33,6 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-
 #    - name: Build the Docker image
 #      run: docker build . --file src/main/resources/docker-resources/Dockerfile --tag brandonbenham/two-sum
     - name: Set up Docker Buildx
