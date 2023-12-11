@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: k6-influxdb-automation
+  name: k6-influxdb-automation
+spec:
+  containers:
+  - image: brandonbenham/k6-influxdb-automation
+    name: k6-influxdb-automation
+    env:
+      - name: K6_INFLUXDB_ORGANIZATION
+        value: "automation"
+      - name: K6_INFLUXDB_BUCKET
+        value: "response-time-data"
+      - name: K6_INFLUXDB_TOKEN
+        value: "gJ3ELwra9AIIFnsCy8ZEQgMBSgpQpXx9koyzBe3S0VSZq_JCylHmYt6KOxy3jNFWeZv6nsW28D--I0IRUCvPzA=="
+      - name: K6_VUS
+        value: "3"
+      - name: K6_DURATION
+        value: "20s"
+      - name: TEST_NAME
+        value: "two-sum"
+    resources: {}
+    command:
+       - "k6"
+       - "run"
+       - "-o"
+       - "xk6-influxdb=http://influxdb:8086"
+       - "--insecure-skip-tls-verify"
+       - "/js/driver.js"
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
