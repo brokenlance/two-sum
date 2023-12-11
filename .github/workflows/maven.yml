@@ -80,28 +80,11 @@ jobs:
         #kubectl rollout status pod/$DEPLOYMENT_NAME
         kubectl apply -f src/main/resources/kube-resources/service.yaml
         kubectl get services -o wide
-  k6:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - name: Run K6 Load Test
-      run: |
         kubectl apply -f src/main/resources/kube-resources/k6.yaml
     - name: Sleep for 30 seconds
       run: sleep 30s
       shell: bash
-  port-forward:
-    needs: k6
-    runs-on: ubuntu-latest
-    steps:
-    - name: Port-Forward
-      run: |
-        kubectl port-forward svc/seasonal-forest-analyzer 8080:80
-  seasonal-forest-analyzer:
-    needs: port-forward
-    runs-on: ubuntu-latest
-    steps:
     - name: Run seasonal forest
       run: |
-        curl --header "Content-type: application/json" http://localhost:8080/v1/analyze -d '{"date":"2023-10-22T21:40:20.1103379Z", "mode":"training", "testName":"two-sum"}'
+        curl --header "Content-type: application/json" http://seasonal-forest-analyzer/v1/analyze -d '{"date":"2023-10-22T21:40:20.1103379Z", "mode":"training", "testName":"two-sum"}'
         kubectl delete pod k6-influxdb-automation
