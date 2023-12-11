@@ -86,5 +86,5 @@ jobs:
       shell: bash
     - name: Run seasonal forest
       run: |
-        curl --header "Content-type: application/json" http://seasonal-forest-analyzer/v1/analyze -d '{"date":"2023-10-22T21:40:20.1103379Z", "mode":"training", "testName":"two-sum"}'
+        curl --header "Content-type: application/json" http://seasonal-forest-analyzer.mycluster-dal10-u3-598878-b9d24b92a5dc610f4beac458524dd8a3-0000.us-south.containers.appdomain.cloud/v1/analyze -d '{"date":"2023-10-22T21:40:20.1103379Z", "mode":"training", "testName":"two-sum"}'
         kubectl delete pod k6-influxdb-automation
