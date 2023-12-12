@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +15,7 @@ import com.example.demo.config.Config;
 import com.example.demo.model.TwoSumRequest;
 import com.example.demo.model.TwoSumResponse;
 import static java.util.Arrays.stream;
+import static java.util.Collections.sort;
 
 @Slf4j
 @Service
@@ -33,6 +35,11 @@ public class TwoSumService
       List< Long > numbers = stream( callService( config.url() ).split( "," ) ).mapToLong( Long::parseLong ).boxed().toList();
 
       log.info( "The random data is: {}", numbers );
+
+      if( "two-pointers".equals( config.algorithm() ) )
+      {
+         return twoPointers( new ArrayList< Long >( numbers ), request.getTargetSum() );
+      }
 
       return bruteForce( numbers, request.getTargetSum() );
    }
@@ -64,6 +71,38 @@ public class TwoSumService
                log.info( "Found solution: {} and {}", numbers.get( i ), numbers.get( j ) );
                return new TwoSumResponse( numbers.get( i ), numbers.get( j ) );
             }
+         }
+      }
+
+      return new TwoSumResponse( -1L, -1L );
+   }
+
+   /**
+    * Solves the two-sum problems using the two-pointer approach.
+    */
+   public TwoSumResponse twoPointers( List< Long > numbers, long target )
+   {
+      sort( numbers );
+
+      int  left  = 0;
+      int  right = numbers.size() - 1;
+      long sum   = 0;
+
+      while( left < right )
+      {
+         sum = numbers.get( left ) + numbers.get( right );
+         if( sum == target )
+         {
+            log.info( "Found solution: {} and {}", numbers.get( left ), numbers.get( right ) );
+            return new TwoSumResponse( numbers.get( left ), numbers.get( right ) );
+         }
+         else if( sum < target )
+         {
+            left++;
+         }
+         else if( sum > target )
+         {
+            right--;
          }
       }
 

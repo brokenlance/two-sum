@@ -17,5 +17,5 @@ spring:
       activate:
          on-profile: cloud
 two-sum-config:
-   algorithm: "brute-force"
+   algorithm: "two-pointers"
    url: "http://php-random/test-random.php"
