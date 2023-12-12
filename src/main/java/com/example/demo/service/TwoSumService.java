@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -14,8 +16,11 @@ import org.springframework.web.reactive.function.client.WebClient;
 import com.example.demo.config.Config;
 import com.example.demo.model.TwoSumRequest;
 import com.example.demo.model.TwoSumResponse;
+import static java.lang.Math.abs;
 import static java.util.Arrays.stream;
 import static java.util.Collections.sort;
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toMap;
 
 @Slf4j
 @Service
@@ -39,6 +44,10 @@ public class TwoSumService
       if( "two-pointers".equals( config.algorithm() ) )
       {
          return twoPointers( new ArrayList< Long >( numbers ), request.getTargetSum() );
+      }
+      else if( "hash".equals( config.algorithm() ) )
+      {
+         return hash( new ArrayList< Long >( numbers ), request.getTargetSum() );
       }
 
       return bruteForce( numbers, request.getTargetSum() );
@@ -103,6 +112,32 @@ public class TwoSumService
          else if( sum > target )
          {
             right--;
+         }
+      }
+
+      return new TwoSumResponse( -1L, -1L );
+   }
+
+   /**
+    * Solves the two-sum approach using hashes.
+    */
+   public TwoSumResponse hash( List< Long > numbers, long target )
+   {
+      Set< Long > set = new HashSet<>();
+      Long        t   = 0L;
+
+      for( Long number : numbers )
+      {
+         t = target - number;
+
+         if( set.contains( t ) )
+         {
+            log.info( "Found solution: {} and {}", t, number );
+            return new TwoSumResponse( t, number );
+         }
+         else
+         {
+            set.add( number );
          }
       }
 

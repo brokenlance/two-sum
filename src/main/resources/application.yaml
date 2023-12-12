@@ -9,7 +9,7 @@ spring:
       activate:
          on-profile: local
 two-sum-config:
-   algorithm: "brute-force"
+   algorithm: ${ALGORITHM:brute-force}
    url: "http://localhost/test-random.php"
 ---
 spring:
@@ -17,5 +17,5 @@ spring:
       activate:
          on-profile: cloud
 two-sum-config:
-   algorithm: "two-pointers"
+   algorithm: ${ALGORITHM:hash}
    url: "http://php-random/test-random.php"
