@@ -4,5 +4,5 @@ metadata:
   name: two-sum
 data:
   spring.profiles.active: "cloud"
-  ALGORITHM: "hash"
+  ALGORITHM: "brute-force"
   _JAVA_OPTIONS: "-XX:+UseG1GC -Xmx128m -Xms128m -XX:NewSize=64m -XX:MaxNewSize=64m -XX:MaxGCPauseMillis=500 -XX:ConcGCThreads=1 -XX:ParallelGCThreads=1 -XX:+UseStringDeduplication -XX:G1ReservePercent=10"

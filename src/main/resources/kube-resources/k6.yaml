@@ -16,9 +16,9 @@ spec:
       - name: K6_INFLUXDB_TOKEN
         value: "gJ3ELwra9AIIFnsCy8ZEQgMBSgpQpXx9koyzBe3S0VSZq_JCylHmYt6KOxy3jNFWeZv6nsW28D--I0IRUCvPzA=="
       - name: K6_VUS
-        value: "3"
+        value: "10"
       - name: K6_DURATION
-        value: "20s"
+        value: "60s"
       - name: TEST_NAME
         value: "two-sum"
     resources: {}
