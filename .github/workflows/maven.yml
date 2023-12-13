@@ -80,7 +80,7 @@ jobs:
         kubectl get services -o wide
         kubectl get nodes -o wide
     - name: Sleep until restart completes
-      run: sleep 60s
+      run: sleep 20s
       shell: bash
     # Deploy the Docker image to the IKS cluster
     - name: Deploy to IKS

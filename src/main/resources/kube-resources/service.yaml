@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    run: two-sum
+    app: two-sum
   name: two-sum
   namespace: default
 spec:
@@ -11,6 +11,8 @@ spec:
     protocol: TCP
     targetPort: 8080
   selector:
-    run: two-sum
+    app: two-sum
   sessionAffinity: None
   type: ClusterIP
+status:
+  loadBalancer: {}
