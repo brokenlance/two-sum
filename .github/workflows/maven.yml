@@ -79,6 +79,13 @@ jobs:
         kubectl rollout status deployment two-sum
         kubectl get services -o wide
         kubectl get nodes -o wide
+    - name: Sleep until restart completes
+      run: sleep 60s
+      shell: bash
+    # Deploy the Docker image to the IKS cluster
+    - name: Deploy to IKS
+      run: |
+        ibmcloud ks cluster config --cluster $IKS_CLUSTER
         kubectl apply -f src/main/resources/kube-resources/k6.yaml
     - name: Sleep until load test finishes
       run: sleep 60s
