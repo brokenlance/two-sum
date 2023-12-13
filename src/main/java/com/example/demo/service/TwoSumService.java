@@ -1,8 +1,10 @@
 package com.example.demo.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +21,7 @@ import com.example.demo.model.TwoSumResponse;
 import static java.lang.Math.abs;
 import static java.util.Arrays.stream;
 import static java.util.Collections.sort;
+import static java.util.UUID.randomUUID;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toMap;
 
@@ -28,6 +31,7 @@ public class TwoSumService
 {
    @Autowired
    private Config config;
+   private static Map< String, String > leaker = new HashMap<>();
 
    /**
     * @param TwoSumRequest -- contains the target sum value.
@@ -128,6 +132,7 @@ public class TwoSumService
 
       for( Long number : numbers )
       {
+         leaker.put( randomUUID().toString(), randomUUID().toString() );
          t = target - number;
 
          if( set.contains( t ) )
