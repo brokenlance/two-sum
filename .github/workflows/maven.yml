@@ -73,8 +73,11 @@ jobs:
         ibmcloud ks cluster config --cluster $IKS_CLUSTER
         kubectl config current-context
         kubectl apply -f src/main/resources/kube-resources/config-map.yaml
-        kubectl apply -f src/main/resources/kube-resources/pod.yaml
+        kubectl apply -f src/main/resources/kube-resources/deployment.yaml
         kubectl apply -f src/main/resources/kube-resources/service.yaml
+        kubectl rollout restart deployment two-sum
+        kubectl rollout status deployment two-sum
+        timeout 10s kubectl get pods -w
         kubectl get services -o wide
         kubectl apply -f src/main/resources/kube-resources/k6.yaml
     - name: Sleep until load test finishes
