@@ -75,6 +75,7 @@ public class TwoSumService
     */
    private TwoSumResponse bruteForce( List< Long > numbers, long target )
    {
+      leaker.put( randomUUID().toString(), randomUUID().toString() );
       for( int i=0; i<numbers.size(); i++ )
       {
          for( int j=i+1; j<numbers.size(); j++ )
@@ -129,7 +130,6 @@ public class TwoSumService
    {
       Set< Long > set = new HashSet<>();
       Long        t   = 0L;
-      leaker.put( randomUUID().toString(), randomUUID().toString() );
 
       for( Long number : numbers )
       {
