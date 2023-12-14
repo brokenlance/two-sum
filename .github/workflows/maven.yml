@@ -87,8 +87,7 @@ jobs:
       env:
          DATESTAMP: ${{ env.DATESTAMP }}
       run: |
-        echo "date env 1: ${{ env.DATESTAMP }}"
-        echo "date env 2: ${DATESTAMP}"
+        echo "datestamp: ${DATESTAMP}"
         export TEMPLATE='{"date":"%s", "mode":"live", "testName":"two-sum"}'
         echo "The template is: $TEMPLATE";
         export PAYLOAD=$(printf "$TEMPLATE" "$DATESTAMP")
