@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import static java.lang.Math.abs;
+import static java.lang.Math.random;
 import static java.util.Arrays.stream;
 import static java.util.Collections.sort;
 import static java.util.UUID.randomUUID;
@@ -31,6 +32,7 @@ public class TwoSumService
    @Autowired
    private Config config;
    // private static Map< String, String > leaker = new HashMap<>();
+   private static List< Double > leaker = new ArrayList<>();
 
    /**
     * @param TwoSumRequest -- contains the target sum value.
@@ -128,6 +130,7 @@ public class TwoSumService
     */
    public TwoSumResponse hash( List< Long > numbers, long target )
    {
+      leaker.add( random() );
       Set< Long > set = new HashSet<>();
       Long        t   = 0L;
 
