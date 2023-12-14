@@ -60,7 +60,7 @@ jobs:
     - name: Authenticate with IBM Cloud CLI
       run: |
         ibmcloud login --apikey "${IBM_CLOUD_API_KEY}" -r "${IBM_CLOUD_REGION}" -g Default
-    - name: Deploy to IKS
+    - name: Deploy system-under-test to IKS
       run: |
         ibmcloud ks cluster config --cluster $IKS_CLUSTER
         kubectl config current-context
@@ -74,7 +74,7 @@ jobs:
     - name: Sleep until restart completes
       run: sleep 20s
       shell: bash
-    - name: Deploy to IKS
+    - name: Deploy K6 to IKS
       run: |
         ibmcloud ks cluster config --cluster $IKS_CLUSTER
         kubectl apply -f src/main/resources/kube-resources/k6.yaml
