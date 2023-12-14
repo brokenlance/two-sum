@@ -1,5 +1,9 @@
 package com.example.demo.service;
 
+import com.example.demo.config.Config;
+import com.example.demo.model.TwoSumRequest;
+import com.example.demo.model.TwoSumResponse;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,14 +14,9 @@ import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
-
 import org.springframework.web.reactive.function.client.WebClient;
 
-import com.example.demo.config.Config;
-import com.example.demo.model.TwoSumRequest;
-import com.example.demo.model.TwoSumResponse;
 import static java.lang.Math.abs;
 import static java.util.Arrays.stream;
 import static java.util.Collections.sort;
@@ -31,7 +30,7 @@ public class TwoSumService
 {
    @Autowired
    private Config config;
-   // private static Map< String, String > leaker = new HashMap<>();
+   private static Map< String, String > leaker = new HashMap<>();
 
    /**
     * @param TwoSumRequest -- contains the target sum value.
@@ -75,7 +74,8 @@ public class TwoSumService
     */
    private TwoSumResponse bruteForce( List< Long > numbers, long target )
    {
-      // leaker.put( randomUUID().toString(), randomUUID().toString() );
+      leaker.put( randomUUID().toString(), "0" );
+
       for( int i=0; i<numbers.size(); i++ )
       {
          for( int j=i+1; j<numbers.size(); j++ )
