@@ -79,7 +79,7 @@ jobs:
         ibmcloud ks cluster config --cluster $IKS_CLUSTER
         kubectl apply -f src/main/resources/kube-resources/k6.yaml
     - name: Sleep until load test finishes
-      run: sleep 60s
+      run: sleep 70s
       shell: bash
     - name: Run seasonal forest
       run: |
