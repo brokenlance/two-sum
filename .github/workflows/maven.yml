@@ -77,14 +77,18 @@ jobs:
     - name: Deploy K6 to IKS
       run: |
         export DATESTAMP=`date -u +"%Y-%m-%dT%H:%M:%S.%N9Z"`
-        echo "The date is: $DATESTAMP";
+        echo "DATESTAMP=$DATESTAMP" >> $GITHUB_ENV;
         ibmcloud ks cluster config --cluster $IKS_CLUSTER
         kubectl apply -f src/main/resources/kube-resources/k6.yaml
     - name: Sleep until load test finishes
       run: sleep 70s
       shell: bash
     - name: Run seasonal forest
+      env:
+         DATESTAMP: ${{ env.DATESTAMP }}
       run: |
+        echo "date env 1: ${{ env.DATESTAMP }}"
+        echo "date env 2: ${DATESTAMP}"
         export TEMPLATE='{"date":"%s", "mode":"live", "testName":"two-sum"}'
         echo "The template is: $TEMPLATE";
         export PAYLOAD=$(printf "$TEMPLATE" "$DATESTAMP")
