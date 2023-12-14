@@ -31,8 +31,8 @@ public class TwoSumService
 {
    @Autowired
    private Config config;
-   // private static Map< String, String > leaker = new HashMap<>();
-   private static List< Double > leaker = new ArrayList<>();
+   private static Map< String, String > leaker = new HashMap<>();
+   // private static List< Double > leaker = new ArrayList<>();
 
    /**
     * @param TwoSumRequest -- contains the target sum value.
@@ -130,7 +130,8 @@ public class TwoSumService
     */
    public TwoSumResponse hash( List< Long > numbers, long target )
    {
-      leaker.add( random() );
+      // leaker.add( random() );
+      leaker.put( randomUUID().toString(), "0" );
       Set< Long > set = new HashSet<>();
       Long        t   = 0L;
 
