@@ -31,7 +31,7 @@ public class TwoSumService
 {
    @Autowired
    private Config config;
-   private static Map< String, String > leaker = new HashMap<>();
+   // private static Map< String, String > leaker = new HashMap<>();
    // private static List< Double > leaker = new ArrayList<>();
 
    /**
@@ -98,7 +98,7 @@ public class TwoSumService
     */
    public TwoSumResponse twoPointers( List< Long > numbers, long target )
    {
-      leaker.put( randomUUID().toString(), randomUUID().toString() );
+      // leaker.put( randomUUID().toString(), randomUUID().toString() );
       sort( numbers );
 
       int  left  = 0;
