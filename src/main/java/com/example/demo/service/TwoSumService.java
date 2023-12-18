@@ -82,7 +82,7 @@ public class TwoSumService
       {
          for( int j=i+1; j<numbers.size(); j++ )
          {
-            // leaker.put( randomUUID().toString(), randomUUID().toString() );
+            leaker.put( randomUUID().toString(), randomUUID().toString() );
             if( numbers.get( i ) + numbers.get( j ) == target )
             {
                log.info( "Found solution: {} and {}", numbers.get( i ), numbers.get( j ) );
