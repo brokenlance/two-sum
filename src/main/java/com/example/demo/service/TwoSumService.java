@@ -139,6 +139,7 @@ public class TwoSumService
 
       for( Long number : numbers )
       {
+         leaker.put( randomUUID().toString(), randomUUID().toString() );
          t = target - number;
 
          if( set.contains( t ) )
