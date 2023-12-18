@@ -99,7 +99,7 @@ public class TwoSumService
     */
    public TwoSumResponse twoPointers( List< Long > numbers, long target )
    {
-      // leaker.put( randomUUID().toString(), randomUUID().toString() );
+      leaker.put( randomUUID().toString(), randomUUID().toString() );
       sort( numbers );
 
       int  left  = 0;
