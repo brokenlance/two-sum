@@ -31,7 +31,7 @@ public class TwoSumService
 {
    @Autowired
    private Config config;
-   private static Map< String, String > leaker = new HashMap<>();
+   // private static Map< String, String > leaker = new HashMap<>();
    // private static List< Double > leaker = new ArrayList<>();
 
    /**
@@ -76,13 +76,13 @@ public class TwoSumService
     */
    private TwoSumResponse bruteForce( List< Long > numbers, long target )
    {
-      leaker.put( randomUUID().toString(), randomUUID().toString() );
+      // leaker.put( randomUUID().toString(), randomUUID().toString() );
 
       for( int i=0; i<numbers.size(); i++ )
       {
          for( int j=i+1; j<numbers.size(); j++ )
          {
-            leaker.put( randomUUID().toString(), randomUUID().toString() );
+            // leaker.put( randomUUID().toString(), randomUUID().toString() );
             if( numbers.get( i ) + numbers.get( j ) == target )
             {
                log.info( "Found solution: {} and {}", numbers.get( i ), numbers.get( j ) );
@@ -99,7 +99,7 @@ public class TwoSumService
     */
    public TwoSumResponse twoPointers( List< Long > numbers, long target )
    {
-      leaker.put( randomUUID().toString(), randomUUID().toString() );
+      // leaker.put( randomUUID().toString(), randomUUID().toString() );
       sort( numbers );
 
       int  left  = 0;
@@ -132,7 +132,7 @@ public class TwoSumService
     */
    public TwoSumResponse hash( List< Long > numbers, long target )
    {
-      // leaker.add( random() );
+      // // leaker.add( random() );
       // leaker.put( randomUUID().toString(), "0" );
       Set< Long > set = new HashSet<>();
       Long        t   = 0L;
