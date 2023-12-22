@@ -18,7 +18,7 @@ spec:
       - name: K6_VUS
         value: "10"
       - name: K6_DURATION
-        value: "3600s"
+        value: "300s"
       - name: TEST_NAME
         value: "two-sum"
     resources: {}
