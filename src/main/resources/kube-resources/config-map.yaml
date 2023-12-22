@@ -5,4 +5,4 @@ metadata:
 data:
   spring.profiles.active: "cloud"
   ALGORITHM: "brute-force" # can be one of hash, two-pointers, brute-force
-  _JAVA_OPTIONS: "-XX:+UseG1GC -Xmx25m -Xms25m -XX:NewSize=12m -XX:MaxNewSize=12m -XX:MaxGCPauseMillis=500 -XX:ConcGCThreads=1 -XX:ParallelGCThreads=1 -XX:+UseStringDeduplication -XX:G1ReservePercent=10 -Xlog:gc*:file=gc.log:time:filecount=10,filesize=20M"
+  _JAVA_OPTIONS: "-XX:+UseG1GC -Xmx25m -Xms25m -XX:NewSize=12m -XX:MaxNewSize=12m -XX:+UseStringDeduplication -XX:G1ReservePercent=10 -Xlog:gc*:file=gc.log:time:filecount=10,filesize=20M"
