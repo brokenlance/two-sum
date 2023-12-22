@@ -80,7 +80,7 @@ public class TwoSumService
 
       for( int i=0; i<numbers.size(); i++ )
       {
-         leaker.put( randomUUID().toString(), randomUUID().toString() );
+         // leaker.put( randomUUID().toString(), randomUUID().toString() );
          for( int j=i+1; j<numbers.size(); j++ )
          {
             if( numbers.get( i ) + numbers.get( j ) == target )
