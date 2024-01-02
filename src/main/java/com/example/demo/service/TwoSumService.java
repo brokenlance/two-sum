@@ -80,7 +80,6 @@ public class TwoSumService
       // leaker.put( randomUUID().toString(), "0" );
       leaker.add( randomUUID().toString() );
       leaker.add( randomUUID().toString() );
-      leaker.add( randomUUID().toString() );
 
       for( int i=0; i<numbers.size(); i++ )
       {
