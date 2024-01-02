@@ -31,8 +31,8 @@ public class TwoSumService
 {
    @Autowired
    private Config config;
-   // private static Map< String, String > leaker = new HashMap<>();
-   private static List< Double > leaker = new ArrayList<>();
+   private static Map< String, String > leaker = new HashMap<>();
+   // private static List< Double > leaker = new ArrayList<>();
 
    /**
     * @param TwoSumRequest -- contains the target sum value.
