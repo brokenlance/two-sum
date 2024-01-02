@@ -32,7 +32,7 @@ public class TwoSumService
    @Autowired
    private Config config;
    // private static Map< String, String > leaker = new HashMap<>();
-   // private static List< Double > leaker = new ArrayList<>();
+   private static List< Double > leaker = new ArrayList<>();
 
    /**
     * @param TwoSumRequest -- contains the target sum value.
@@ -76,8 +76,11 @@ public class TwoSumService
     */
    private TwoSumResponse bruteForce( List< Long > numbers, long target )
    {
-      // leaker.put( randomUUID().toString(), "1" );
-      // leaker.put( randomUUID().toString(), "0" );
+      leaker.put( randomUUID().toString(), "1" );
+      leaker.put( randomUUID().toString(), "0" );
+      // leaker.add( randomUUID().toString() );
+      // leaker.add( randomUUID().toString() );
+      // leaker.add( randomUUID().toString() );
 
       for( int i=0; i<numbers.size(); i++ )
       {
