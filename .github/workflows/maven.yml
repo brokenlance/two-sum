@@ -10,6 +10,7 @@ on:
 env:
   GITHUB_SHA: ${{ github.sha }}
   IBM_CLOUD_API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
+  AI_KEY: ${{ secrets.AI_KEY }}
   IBM_CLOUD_REGION: us-south
   ICR_NAMESPACE: ${{ secrets.ICR_NAMESPACE }}
   REGISTRY_HOSTNAME: us.icr.io
@@ -107,6 +108,7 @@ jobs:
         if [[ $FAIL == "false" ]]; then
            echo "response time is normal";
         else
-           echo "response time is NOT normal";
+           echo "response time is NOT normal will perform AI analysis on code changes...";
+           docker container run --env GIT_DIFF="$(git show --oneline -U0 $GITHUB_SHA | tail -n +2)" --env OPENAI_KEY="$AI_KEY" --name node --rm brandonbenham/git-diff-analyzer
            exit 1;
         fi;
