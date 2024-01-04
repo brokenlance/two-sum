@@ -84,7 +84,7 @@ jobs:
       run: sleep 300s
       shell: bash
     - name: Garbage Collection Analysis
-      if: false
+      if: false # disable for now since this takes a while
       run: |
         POD=$(kubectl get pods | grep two-sum | awk '{print $1}');
         GCFILE=$(kubectl exec -it $POD -- /bin/sh -c 'ls --color=never gc*' | tr -d '\r' | tr -d '\n')
@@ -107,5 +107,6 @@ jobs:
         if [[ $FAIL == "false" ]]; then
            echo "response time is normal";
         else
+           echo "response time is NOT normal";
            exit 1;
         fi;
