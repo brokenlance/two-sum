@@ -32,7 +32,7 @@ public class TwoSumService
    @Autowired
    private Config config;
    // private static Map< String, String > leaker = new HashMap<>();
-   private static List< String > leaker = new ArrayList<>();
+   // private static List< String > leaker = new ArrayList<>();
 
    /**
     * @param TwoSumRequest -- contains the target sum value.
@@ -41,7 +41,7 @@ public class TwoSumService
    public TwoSumResponse twoSum( TwoSumRequest request )
    {
       log.info( "TwoSumService::twoSum algorithm: {}", config.algorithm() );
-      leaker.add( randomUUID().toString() );
+      // leaker.add( randomUUID().toString() );
 
       List< Long > numbers = stream( callService( config.url() ).split( "," ) ).mapToLong( Long::parseLong ).boxed().toList();
 
