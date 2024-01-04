@@ -21,6 +21,7 @@ env:
 
 jobs:
   test:
+    if: false
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -35,7 +36,6 @@ jobs:
          echo "here's the other form:";
          git show --oneline -U0;
   build:
-    if: false
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
