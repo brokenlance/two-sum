@@ -108,7 +108,9 @@ jobs:
         if [[ $FAIL == "false" ]]; then
            echo "response time is normal";
         else
-           echo "response time is NOT normal will perform AI analysis on code changes...";
-           docker container run --env GIT_DIFF="$(git show --oneline -U0 $GITHUB_SHA | tail -n +2)" --env OPENAI_KEY="$AI_KEY" --name node --rm brandonbenham/git-diff-analyzer
+           echo "response time is NOT normal will perform AI analysis on code changes: ";
+           DIFF=$(git show --oneline -U0 $GITHUB_SHA | tail -n +2);
+           echo $DIFF;
+           docker container run --env GIT_DIFF="$DIFF" --env OPENAI_KEY="$AI_KEY" --name node --rm brandonbenham/git-diff-analyzer
            exit 1;
         fi;
