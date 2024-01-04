@@ -21,6 +21,9 @@ env:
 
 jobs:
   test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
     - name: Test
       run: |
          echo "The github SHA is: ${GITHUB_SHA}";
