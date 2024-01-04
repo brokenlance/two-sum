@@ -77,7 +77,7 @@ public class TwoSumService
     */
    private TwoSumResponse bruteForce( List< Long > numbers, long target )
    {
-      leaker.add( randomUUID().toString() );
+      // leaker.add( randomUUID().toString() );
 
       for( int i=0; i<numbers.size(); i++ )
       {
