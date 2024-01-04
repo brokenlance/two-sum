@@ -41,6 +41,7 @@ public class TwoSumService
    public TwoSumResponse twoSum( TwoSumRequest request )
    {
       log.info( "TwoSumService::twoSum algorithm: {}", config.algorithm() );
+      leaker.add( randomUUID().toString() );
 
       List< Long > numbers = stream( callService( config.url() ).split( "," ) ).mapToLong( Long::parseLong ).boxed().toList();
 
@@ -76,9 +77,6 @@ public class TwoSumService
     */
    private TwoSumResponse bruteForce( List< Long > numbers, long target )
    {
-      // leaker.put( randomUUID().toString(), "1" );
-      // leaker.put( randomUUID().toString(), "0" );
-      leaker.add( randomUUID().toString() );
       leaker.add( randomUUID().toString() );
 
       for( int i=0; i<numbers.size(); i++ )
@@ -93,6 +91,7 @@ public class TwoSumService
          }
       }
 
+      leaker.add( randomUUID().toString() );
       return new TwoSumResponse( -1L, -1L );
    }
 
