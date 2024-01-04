@@ -83,6 +83,13 @@ jobs:
     - name: Sleep until load test finishes
       run: sleep 300s
       shell: bash
+    - name: Garbage Collection Analysis
+      run: |
+        POD=$(kubectl get pods | grep two-sum | awk '{print $1}');
+        GCFILE=$(kubectl exec -it $POD -- /bin/sh -c 'ls --color=never gc*' | tr -d '\r' | tr -d '\n')
+        kubectl cp $POD:$GCFILE gc.log;
+        # NOTE: the jvmoptions data should reflect the actual parameters used in the config map
+        docker container run -v "$PWD":/home/garbagecat/files ghcr.io/mgm3746/garbagecat --console --preprocess --jvmoptions "-XX:+UseG1GC -Xmx48m -Xms48m -XX:NewSize=32m -XX:MaxNewSize=32m -XX:+UseStringDeduplication -XX:G1ReservePercent=10" /home/garbagecat/files/gc.log
     - name: Run seasonal forest
       env:
          DATESTAMP: ${{ env.DATESTAMP }}
