@@ -20,7 +20,14 @@ env:
   PORT: 5001
 
 jobs:
+  test:
+    - name: Test
+      run: |
+         echo "The github SHA is: ${GITHUB_SHA}";
+         DIFF=$(git show --oneline -U0 ${GITHUB_SHA})
+         echo $DIFF
   build:
+    if: false
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
