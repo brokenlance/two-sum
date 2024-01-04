@@ -84,6 +84,7 @@ jobs:
       run: sleep 300s
       shell: bash
     - name: Garbage Collection Analysis
+      if: false
       run: |
         POD=$(kubectl get pods | grep two-sum | awk '{print $1}');
         GCFILE=$(kubectl exec -it $POD -- /bin/sh -c 'ls --color=never gc*' | tr -d '\r' | tr -d '\n')
@@ -95,7 +96,7 @@ jobs:
          DATESTAMP: ${{ env.DATESTAMP }}
       run: |
         echo "datestamp: ${DATESTAMP}"
-        export TEMPLATE='{"date":"%s", "mode":"live", "testName":"two-sum"}'
+        export TEMPLATE='{"date":"%s", "mode":"training", "testName":"two-sum"}'
         echo "The template is: $TEMPLATE";
         export PAYLOAD=$(printf "$TEMPLATE" "$DATESTAMP")
         echo "The payload is: $PAYLOAD"
