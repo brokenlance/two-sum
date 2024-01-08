@@ -4,5 +4,5 @@ metadata:
   name: two-sum
 data:
   spring.profiles.active: "cloud"
-  ALGORITHM: "two-pointers" # can be one of hash, two-pointers, brute-force
+  ALGORITHM: "brute-force" # can be one of hash, two-pointers, brute-force
   _JAVA_OPTIONS: "-XX:+UseG1GC -Xmx48m -Xms48m -XX:NewSize=32m -XX:MaxNewSize=32m -XX:+UseStringDeduplication -XX:G1ReservePercent=10 -Xlog:gc*,safepoint=info:file=gc_%p_%t.log:time,uptimemillis:filecount=4,filesize=50M"
