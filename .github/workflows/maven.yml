@@ -8,7 +8,7 @@ on:
 
 # Environment variables available to all jobs and steps in this workflow
 env:
-  CLOUD: AKS
+  IS_AKS: true
   GITHUB_SHA: ${{ github.sha }}
   IBM_CLOUD_API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
   AI_KEY: ${{ secrets.AI_KEY }}
@@ -22,7 +22,7 @@ env:
 
 jobs:
   test:
-    if: contains( 'AKS', CLOUD )
+    if: $IS_AKS
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
