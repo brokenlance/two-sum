@@ -119,9 +119,9 @@ jobs:
       if: ${{ env.CLOUD == 'AKS' }}
       uses: Azure/login@v1.5.1
       with:
-        client-id: $AKS_CLIENT_ID
-        subscription-id: $AKS_SUBSCRIPTION
-        tenant-id: $AKS_TENANT_ID
+        client-id: ${{ secrets.AKS_CLIENT_ID }}
+        subscription-id: ${{ secrets.AKS_SUBSCRIPTION }}
+        tenant-id: ${{ secrets.AKS_TENANT_ID }}
     - name: Set AKS context
       uses: azure/aks-set-context@v3.0
       if: ${{ env.CLOUD == 'AKS' }}
