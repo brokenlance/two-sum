@@ -37,6 +37,7 @@ jobs:
          echo $DIFF;
          echo "here's the other form:";
          git show --oneline -U0;
+         export IS_AKS=true
     - name: Azure Login
       if: $IS_AKS
       uses: Azure/login@v1.5.1
