@@ -22,7 +22,7 @@ env:
 
 jobs:
   test:
-    if: ${{ CLOUD == 'AKS' }}
+    if: ${{ env.CLOUD == 'AKS' }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
