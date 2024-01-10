@@ -10,7 +10,7 @@ on:
 env:
   IS_AKS: true
   IS_IKS: false
-  CLOUD: AKS
+  CLOUD: IKS
   GITHUB_SHA: ${{ github.sha }}
   IBM_CLOUD_API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
   AI_KEY: ${{ secrets.AI_KEY }}
