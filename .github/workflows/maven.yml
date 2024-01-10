@@ -36,8 +36,8 @@ jobs:
          echo $DIFF;
          echo "here's the other form:";
          git show --oneline -U0;
-            - name: Azure Login
-    - uses: Azure/login@v1.5.1
+    - name: Azure Login
+      uses: Azure/login@v1.5.1
       with:
         subscription-id: 5ef1ecdb-137a-43a5-b61d-512c36a5ff21
           
