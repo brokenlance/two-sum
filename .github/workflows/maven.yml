@@ -33,7 +33,7 @@ jobs:
       with:
          fetch-depth: 2
     - name: Test
-      if: ${{ env.IS_AKS == 'true' }}
+      if: ${{ env.CLOUD == 'AKS' }}
       run: |
          git version;
          echo "The github SHA is: ${GITHUB_SHA}";
