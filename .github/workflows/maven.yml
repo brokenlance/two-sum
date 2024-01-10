@@ -7,6 +7,8 @@ on:
     branches: [ "master" ]
 
 # Environment variables available to all jobs and steps in this workflow
+# Change the CLOUD env variable depending on the cloud provider
+# Update the payload mode to either training or live depending on the type 
 env:
   CLOUD: AKS
   GITHUB_SHA: ${{ github.sha }}
@@ -16,53 +18,15 @@ env:
   AKS_TENANT_ID: ${{ secrets.AKS_TENANT_ID }}
   AI_KEY: ${{ secrets.AI_KEY }}
   IBM_CLOUD_REGION: us-south
-  ICR_NAMESPACE: ${{ secrets.ICR_NAMESPACE }}
   REGISTRY_HOSTNAME: us.icr.io
   IKS_CLUSTER: mycluster-dal10-u3c.2x4
   AKS_CLUSTER: mistic
   AKS_RESOURCE: mistic
-  DEPLOYMENT_NAME: two-sum
-  PORT: 5001
 
 permissions:
   id-token: write
 
 jobs:
-  test:
-    if: false
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-      with:
-         fetch-depth: 2
-    - name: Test
-      if: ${{ env.CLOUD == 'AKS' }}
-      run: |
-         git version;
-         echo "The github SHA is: ${GITHUB_SHA}";
-         DIFF=$(git show --oneline -U0 ${GITHUB_SHA});
-         echo $DIFF;
-         echo "here's the other form:";
-         git show --oneline -U0;
-    - name: Azure Login
-      if: ${{ env.CLOUD == 'AKS' }}
-      uses: Azure/login@v1.5.1
-      with:
-        client-id: 69a7dfef-5f9b-4e65-a54c-b84d2b869fd0
-        subscription-id: 5ef1ecdb-137a-43a5-b61d-512c36a5ff21
-        tenant-id: 93f33571-550f-43cf-b09f-cd331338d086
-    - name: Set AKS context
-      uses: azure/aks-set-context@v3.0
-      if: ${{ env.CLOUD == 'AKS' }}
-      with:
-        resource-group: mistic
-        cluster-name: mistic
-    - name: Deploy system-under-test to the cloud
-      if: ${{ env.CLOUD == 'AKS' }}
-      run: |
-        kubectl config current-context
-        kubectl get deploy
-          
   build:
     runs-on: ubuntu-latest
     steps:
@@ -161,7 +125,7 @@ jobs:
          DATESTAMP: ${{ env.DATESTAMP }}
       run: |
         echo "datestamp: ${DATESTAMP}"
-        export TEMPLATE='{"date":"%s", "mode":"training", "testName":"two-sum"}'
+        export TEMPLATE='{"date":"%s", "mode":"live", "testName":"two-sum"}'
         echo "The template is: $TEMPLATE";
         export PAYLOAD=$(printf "$TEMPLATE" "$DATESTAMP")
         echo "The payload is: $PAYLOAD"
