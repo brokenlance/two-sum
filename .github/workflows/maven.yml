@@ -18,7 +18,6 @@ env:
   IBM_CLOUD_REGION: us-south
   ICR_NAMESPACE: ${{ secrets.ICR_NAMESPACE }}
   REGISTRY_HOSTNAME: us.icr.io
-  IMAGE_NAME: iks-test
   IKS_CLUSTER: mycluster-dal10-u3c.2x4
   AKS_CLUSTER: mistic
   AKS_RESOURCE: mistic
@@ -126,8 +125,8 @@ jobs:
       uses: azure/aks-set-context@v3.0
       if: ${{ env.CLOUD == 'AKS' }}
       with:
-        resource-group: $AKS_RESOURCE
-        cluster-name: $AKS_CLUSTER
+        resource-group: ${{ AKS_RESOURCE }}
+        cluster-name: ${{ AKS_CLUSTER }}
     - name: Deploy system-under-test to the cloud
       run: |
         kubectl config current-context
