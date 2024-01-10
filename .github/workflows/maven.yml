@@ -165,7 +165,13 @@ jobs:
         echo "The template is: $TEMPLATE";
         export PAYLOAD=$(printf "$TEMPLATE" "$DATESTAMP")
         echo "The payload is: $PAYLOAD"
-        RESPONSE=$(curl -s --header "Content-type: application/json" http://seasonal-forest-analyzer.mycluster-dal10-u3-598878-b9d24b92a5dc610f4beac458524dd8a3-0000.us-south.containers.appdomain.cloud/v1/analyze -d "$PAYLOAD")
+        if [[ $CLOUD == "IKS" ]]; then
+           echo "Calling seasonal forest in IKS";
+           RESPONSE=$(curl -s --header "Content-type: application/json" http://seasonal-forest-analyzer.mycluster-dal10-u3-598878-b9d24b92a5dc610f4beac458524dd8a3-0000.us-south.containers.appdomain.cloud/v1/analyze -d "$PAYLOAD")
+        else
+           echo "Calling seasonal forest in AKS";
+           RESPONSE=$(curl -s --header "Content-type: application/json" http://seasonal-forest-analyzer.3bb425e0bd3a462f8123.southcentralus.aksapp.io/v1/analyze -d "$PAYLOAD")
+        fi;
         echo $RESPONSE;
         FAIL=$(echo $RESPONSE | jq -r '.fail');
         DIFF=$(echo $RESPONSE | jq -r '.difference');
