@@ -33,6 +33,7 @@ jobs:
       with:
          fetch-depth: 2
     - name: Test
+      if: true
       run: |
          git version;
          echo "The github SHA is: ${GITHUB_SHA}";
@@ -54,6 +55,7 @@ jobs:
     - name: Deploy system-under-test to IKS
       run: |
         kubectl config current-context
+        kubectl get deploy
           
   build:
     if: false
