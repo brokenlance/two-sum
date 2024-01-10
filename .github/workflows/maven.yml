@@ -110,6 +110,11 @@ jobs:
       run: |
         ibmcloud login --apikey "${IBM_CLOUD_API_KEY}" -r "${IBM_CLOUD_REGION}" -g Default
         ibmcloud ks cluster config --cluster $IKS_CLUSTER
+    - name: Test Env Vars
+      if: ${{ env.CLOUD == 'AKS' }}
+      run: |
+         env
+         echo $AKS_TENANT_ID
     - name: Azure Login
       if: ${{ env.CLOUD == 'AKS' }}
       uses: Azure/login@v1.5.1
