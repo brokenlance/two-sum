@@ -8,17 +8,20 @@ on:
 
 # Environment variables available to all jobs and steps in this workflow
 env:
-  IS_AKS: true
-  IS_IKS: false
-  CLOUD: IKS
+  CLOUD: AKS
   GITHUB_SHA: ${{ github.sha }}
   IBM_CLOUD_API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
+  AKS_SUBSCRIPTION: ${{ secrets.AKS_SUBSCRIPTION }}
+  AKS_CLIENT_ID: ${{ secrets.AKS_CLIENT_ID }}
+  AKS_TENANT_ID: ${{ secrets.AKS_TENANT_ID }}
   AI_KEY: ${{ secrets.AI_KEY }}
   IBM_CLOUD_REGION: us-south
   ICR_NAMESPACE: ${{ secrets.ICR_NAMESPACE }}
   REGISTRY_HOSTNAME: us.icr.io
   IMAGE_NAME: iks-test
   IKS_CLUSTER: mycluster-dal10-u3c.2x4
+  AKS_CLUSTER: mistic
+  AKS_RESOURCE: mistic
   DEPLOYMENT_NAME: two-sum
   PORT: 5001
 
@@ -27,6 +30,7 @@ permissions:
 
 jobs:
   test:
+    if: false
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -42,23 +46,25 @@ jobs:
          echo "here's the other form:";
          git show --oneline -U0;
     - name: Azure Login
-      if: true
+      if: ${{ env.CLOUD == 'AKS' }}
       uses: Azure/login@v1.5.1
       with:
         client-id: 69a7dfef-5f9b-4e65-a54c-b84d2b869fd0
         subscription-id: 5ef1ecdb-137a-43a5-b61d-512c36a5ff21
         tenant-id: 93f33571-550f-43cf-b09f-cd331338d086
-    - uses: azure/aks-set-context@v3.0
+    - name: Set AKS context
+      uses: azure/aks-set-context@v3.0
+      if: ${{ env.CLOUD == 'AKS' }}
       with:
         resource-group: mistic
         cluster-name: mistic
-    - name: Deploy system-under-test to IKS
+    - name: Deploy system-under-test to the cloud
+      if: ${{ env.CLOUD == 'AKS' }}
       run: |
         kubectl config current-context
         kubectl get deploy
           
   build:
-    if: false
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -92,6 +98,7 @@ jobs:
         cache-to: type=gha,mode=max
         file: ./src/main/resources/docker-resources/Dockerfile
     - name: Install IBM Cloud CLI
+      if: ${{ env.CLOUD == 'IKS' }}
       run: |
         curl -fsSL https://clis.cloud.ibm.com/install/linux | sh
         ibmcloud --version
@@ -99,11 +106,25 @@ jobs:
         ibmcloud plugin install -f kubernetes-service
         #ibmcloud plugin install -f container-registry
     - name: Authenticate with IBM Cloud CLI
+      if: ${{ env.CLOUD == 'IKS' }}
       run: |
         ibmcloud login --apikey "${IBM_CLOUD_API_KEY}" -r "${IBM_CLOUD_REGION}" -g Default
-    - name: Deploy system-under-test to IKS
-      run: |
         ibmcloud ks cluster config --cluster $IKS_CLUSTER
+    - name: Azure Login
+      if: ${{ env.CLOUD == 'AKS' }}
+      uses: Azure/login@v1.5.1
+      with:
+        client-id: $AKS_CLIENT_ID
+        subscription-id: $AKS_SUBSCRIPTION
+        tenant-id: $AKS_TENANT_ID
+    - name: Set AKS context
+      uses: azure/aks-set-context@v3.0
+      if: ${{ env.CLOUD == 'AKS' }}
+      with:
+        resource-group: $AKS_RESOURCE
+        cluster-name: $AKS_CLUSTER
+    - name: Deploy system-under-test to the cloud
+      run: |
         kubectl config current-context
         kubectl apply -f src/main/resources/kube-resources/config-map.yaml
         kubectl apply -f src/main/resources/kube-resources/deployment.yaml
@@ -115,11 +136,10 @@ jobs:
     - name: Sleep until restart completes
       run: sleep 20s
       shell: bash
-    - name: Deploy K6 to IKS
+    - name: Deploy K6 to the cloud
       run: |
         export DATESTAMP=`date -u +"%Y-%m-%dT%H:%M:%S.%N9Z"`
         echo "DATESTAMP=$DATESTAMP" >> $GITHUB_ENV;
-        ibmcloud ks cluster config --cluster $IKS_CLUSTER
         kubectl apply -f src/main/resources/kube-resources/k6.yaml
     - name: Sleep until load test finishes
       run: sleep 300s
