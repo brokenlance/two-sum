@@ -8,8 +8,8 @@ on:
 
 # Environment variables available to all jobs and steps in this workflow
 env:
-  CLOUD: 'AKS'
-  AKS: ${{ CLOUD == 'AKS' }}
+  CLOUD: AKS
+  AKS: ${{ env.CLOUD == 'AKS' }}
   GITHUB_SHA: ${{ github.sha }}
   IBM_CLOUD_API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
   AI_KEY: ${{ secrets.AI_KEY }}
