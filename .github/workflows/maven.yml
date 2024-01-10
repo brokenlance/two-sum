@@ -22,6 +22,9 @@ env:
   DEPLOYMENT_NAME: two-sum
   PORT: 5001
 
+permissions:
+  id_token: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
