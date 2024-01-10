@@ -22,7 +22,7 @@ env:
 
 jobs:
   test:
-    if: contains( 'AKS', $CLOUD )
+    if: contains( 'AKS', env.CLOUD )
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
