@@ -108,7 +108,12 @@ jobs:
       run: |
         export DATESTAMP=`date -u +"%Y-%m-%dT%H:%M:%S.%N9Z"`
         echo "DATESTAMP=$DATESTAMP" >> $GITHUB_ENV;
-        kubectl apply -f src/main/resources/kube-resources/k6.yaml
+        if [[ $CLOUD == "IKS" ]]; then
+           sed s/TOKEN-VALUE/${{ secrets.K6_TOKEN_IKS }}/g src/main/resources/kube-resources/k6.yaml > k6.yaml
+        else
+           sed s/TOKEN-VALUE/${{ secrets.K6_TOKEN_AKS }}/g src/main/resources/kube-resources/k6.yaml > k6.yaml
+        fi;
+        kubectl apply -f k6.yaml
     - name: Sleep until load test finishes
       run: sleep 300s
       shell: bash
