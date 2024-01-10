@@ -8,6 +8,7 @@ on:
 
 # Environment variables available to all jobs and steps in this workflow
 env:
+  CLOUD: "AKS"
   GITHUB_SHA: ${{ github.sha }}
   IBM_CLOUD_API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
   AI_KEY: ${{ secrets.AI_KEY }}
@@ -21,7 +22,7 @@ env:
 
 jobs:
   test:
-    if: false
+    if: env.CLOUD == 'AKS'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -35,7 +36,13 @@ jobs:
          echo $DIFF;
          echo "here's the other form:";
          git show --oneline -U0;
+            - name: Azure Login
+     - uses: Azure/login@v1.5.1
+       with:
+         subscription-id: 5ef1ecdb-137a-43a5-b61d-512c36a5ff21
+          
   build:
+    if: false
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
