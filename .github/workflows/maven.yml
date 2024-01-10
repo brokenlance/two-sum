@@ -44,6 +44,7 @@ jobs:
       with:
         subscription-id: 5ef1ecdb-137a-43a5-b61d-512c36a5ff21
         tenant-id: 93f33571-550f-43cf-b09f-cd331338d086
+        auth-type: IDENTITY
           
   build:
     if: false
