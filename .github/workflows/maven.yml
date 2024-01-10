@@ -23,7 +23,7 @@ env:
   PORT: 5001
 
 permissions:
-  id_token: write
+  id-token: write
 
 jobs:
   test:
