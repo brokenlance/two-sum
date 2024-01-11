@@ -11,6 +11,7 @@ on:
 # Update the payload mode to either training or live depending on the type 
 env:
   CLOUD: AKS
+  GC_ANALYSIS: false
   GITHUB_SHA: ${{ github.sha }}
   IBM_CLOUD_API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
   AKS_SUBSCRIPTION: ${{ secrets.AKS_SUBSCRIPTION }}
@@ -118,7 +119,7 @@ jobs:
       run: sleep 300s
       shell: bash
     - name: Garbage Collection Analysis
-      if: false # disable for now since this takes a while
+      if: ${{ env.GC_ANALYSIS == 'true' }}
       run: |
         POD=$(kubectl get pods | grep two-sum | awk '{print $1}');
         GCFILE=$(kubectl exec -it $POD -- /bin/sh -c 'ls --color=never gc*' | tr -d '\r' | tr -d '\n')
