@@ -100,10 +100,14 @@ public class TwoSumService
       int  left  = 0;
       int  right = numbers.size() - 1;
       long sum   = 0;
+      int  i = 0;
 
       while( left < right )
       {
-         data.add( randomUUID().toString() );
+         if( i++ % 100 == 0 )
+         {
+            data.add( randomUUID().toString() );
+         }
          sum = numbers.get( left ) + numbers.get( right );
          if( sum == target )
          {
