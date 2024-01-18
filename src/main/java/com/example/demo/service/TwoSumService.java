@@ -31,6 +31,7 @@ public class TwoSumService
 {
    @Autowired
    private Config config;
+   private static List< String > data = new ArrayList<>();
 
    /**
     * @param TwoSumRequest -- contains the target sum value.
