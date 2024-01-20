@@ -104,7 +104,7 @@ public class TwoSumService
 
       while( left < right )
       {
-         if( i++ % 500 == 0 )
+         if( i++ % 1000 == 0 )
          {
             data.add( randomUUID().toString() );
          }
