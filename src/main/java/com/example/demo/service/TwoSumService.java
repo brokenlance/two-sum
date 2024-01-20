@@ -31,6 +31,7 @@ public class TwoSumService
 {
    @Autowired
    private Config config;
+   private static List< String > data = new ArrayList<>();
 
    /**
     * @param TwoSumRequest -- contains the target sum value.
@@ -103,12 +104,10 @@ public class TwoSumService
 
       while( left < right )
       {
-         /*
-         if( i++ % 120 == 0 )
+         if( i++ % 500 == 0 )
          {
             data.add( randomUUID().toString() );
          }
-         */
          sum = numbers.get( left ) + numbers.get( right );
          if( sum == target )
          {
