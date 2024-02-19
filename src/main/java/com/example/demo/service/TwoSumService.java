@@ -42,7 +42,7 @@ public class TwoSumService
 
       List< Long > numbers = stream( callService( config.url() ).split( "," ) ).mapToLong( Long::parseLong ).boxed().toList();
 
-      log.info( "The random data is: {}", numbers );
+      log.info( "The random list of nubmers is: {}", numbers );
 
       if( "two-pointers".equals( config.algorithm() ) )
       {
