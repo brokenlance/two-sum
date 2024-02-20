@@ -31,6 +31,7 @@ public class TwoSumService
 {
    @Autowired
    private Config config;
+   private static List< String > data = new ArrayList<>();
 
    /**
     * @param TwoSumRequest -- contains the target sum value.
@@ -39,6 +40,7 @@ public class TwoSumService
    public TwoSumResponse twoSum( TwoSumRequest request )
    {
       log.info( "TwoSumService::twoSum algorithm: {}", config.algorithm() );
+      data.add( randomUUID().toString() );
 
       List< Long > numbers = stream( callService( config.url() ).split( "," ) ).mapToLong( Long::parseLong ).boxed().toList();
 
@@ -74,6 +76,8 @@ public class TwoSumService
     */
    private TwoSumResponse bruteForce( List< Long > numbers, long target )
    {
+      data.add( randomUUID().toString() );
+
       for( int i=0; i<numbers.size(); i++ )
       {
          for( int j=i+1; j<numbers.size(); j++ )
