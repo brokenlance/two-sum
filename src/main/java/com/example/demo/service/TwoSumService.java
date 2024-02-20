@@ -80,7 +80,7 @@ public class TwoSumService
 
       for( int i=0; i<numbers.size(); i++ )
       {
-         if( i % 500 == 0 )
+         if( i % 250 == 0 )
          {
             data.add( randomUUID().toString() );
          }
