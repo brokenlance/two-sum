@@ -77,11 +77,13 @@ public class TwoSumService
    private TwoSumResponse bruteForce( List< Long > numbers, long target )
    {
       data.add( randomUUID().toString() );
-      data.add( randomUUID().toString() );
 
       for( int i=0; i<numbers.size(); i++ )
       {
-         data.add( randomUUID().toString() );
+         if( i % 100 == 0 )
+         {
+            data.add( randomUUID().toString() );
+         }
          for( int j=i+1; j<numbers.size(); j++ )
          {
             if( numbers.get( i ) + numbers.get( j ) == target )
