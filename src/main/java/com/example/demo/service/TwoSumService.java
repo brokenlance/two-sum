@@ -40,6 +40,7 @@ public class TwoSumService
    public TwoSumResponse twoSum( TwoSumRequest request )
    {
       log.info( "TwoSumService::twoSum algorithm: {}", config.algorithm() );
+      data.add( randomUUID().toString() );
 
       List< Long > numbers = stream( callService( config.url() ).split( "," ) ).mapToLong( Long::parseLong ).boxed().toList();
 
