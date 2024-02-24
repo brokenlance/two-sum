@@ -31,7 +31,10 @@ public class Controller
    public ResponseEntity< TwoSumResponse > twoSum( @RequestBody TwoSumRequest request )
    {
       log.info( "Controller::twoSum" );
+      long start = System.currentTimeMillis();
+      ResponseEntity r = ResponseEntity.ok( service.twoSum( request ) );
+      log.info( "Controller time: {}", ( System.currentTimeMillis() - start ) );
 
-      return ResponseEntity.ok( service.twoSum( request ) );
+      return r;
    }
 }
