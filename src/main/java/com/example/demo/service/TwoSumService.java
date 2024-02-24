@@ -40,7 +40,9 @@ public class TwoSumService
    {
       log.info( "TwoSumService::twoSum algorithm: {}", config.algorithm() );
 
+      long start = System.currentTimeMillis();
       List< Long > numbers = stream( callService( config.url() ).split( "," ) ).mapToLong( Long::parseLong ).boxed().toList();
+      log.info( "PHP time: {}", ( System.currentTimeMillis() - start ) );
 
       log.info( "The random list of nubmers is: {}", numbers );
 
