@@ -44,7 +44,7 @@ public class TwoSumService
       List< Long > numbers = stream( callService( config.url() ).split( "," ) ).mapToLong( Long::parseLong ).boxed().toList();
       log.info( "PHP time: {}", ( System.currentTimeMillis() - start ) );
 
-      log.info( "The random list of nubmers is: {}", numbers );
+      // log.info( "The random list of nubmers is: {}", numbers );
 
       if( "two-pointers".equals( config.algorithm() ) )
       {
