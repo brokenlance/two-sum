@@ -116,7 +116,7 @@ jobs:
         fi;
         kubectl apply -f k6.yaml
     - name: Sleep until load test finishes
-      run: sleep 1000s
+      run: sleep 600s
       shell: bash
     - name: Garbage Collection Analysis
       if: ${{ env.GC_ANALYSIS == 'true' }}
