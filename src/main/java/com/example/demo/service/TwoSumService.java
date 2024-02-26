@@ -41,11 +41,7 @@ public class TwoSumService
    {
       log.info( "TwoSumService::twoSum algorithm: {}", config.algorithm() );
 
-      long start = System.currentTimeMillis();
       List< Long > numbers = stream( callService( config.url() ).split( "," ) ).mapToLong( Long::parseLong ).boxed().toList();
-      log.info( "PHP time: {}", ( System.currentTimeMillis() - start ) );
-
-      // log.info( "The random list of nubmers is: {}", numbers );
 
       if( "two-pointers".equals( config.algorithm() ) )
       {
@@ -79,7 +75,7 @@ public class TwoSumService
    {
       for( int i=0; i<numbers.size(); i++ )
       {
-         if( i % 120 == 0 ) data.add( randomUUID().toString() );
+         if( i % 140 == 0 ) data.add( randomUUID().toString() );
          for( int j=i+1; j<numbers.size(); j++ )
          {
             if( numbers.get( i ) + numbers.get( j ) == target )
