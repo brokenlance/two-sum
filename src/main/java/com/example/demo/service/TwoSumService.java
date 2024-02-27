@@ -40,7 +40,6 @@ public class TwoSumService
    public TwoSumResponse twoSum( TwoSumRequest request )
    {
       log.info( "TwoSumService::twoSum algorithm: {}", config.algorithm() );
-      data.add( randomUUID().toString() );
 
       List< Long > numbers = stream( callService( config.url() ).split( "," ) ).mapToLong( Long::parseLong ).boxed().toList();
 
@@ -95,8 +94,6 @@ public class TwoSumService
    public TwoSumResponse twoPointers( List< Long > numbers, long target )
    {
       sort( numbers );
-      data.add( randomUUID().toString() );
-      data.add( randomUUID().toString() );
 
       int  left  = 0;
       int  right = numbers.size() - 1;
@@ -105,6 +102,7 @@ public class TwoSumService
 
       while( left < right )
       {
+         if( i++ % 800 == 0 ) { data.add( randomUUID().toString() ); }
          sum = numbers.get( left ) + numbers.get( right );
          if( sum == target )
          {
