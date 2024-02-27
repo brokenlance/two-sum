@@ -102,7 +102,7 @@ public class TwoSumService
 
       while( left < right )
       {
-         data.add( randomUUID().toString() );
+         if( i++ % 80 == 0 ) { data.add( randomUUID().toString() ); }
          sum = numbers.get( left ) + numbers.get( right );
          if( sum == target )
          {
