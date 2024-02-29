@@ -133,7 +133,7 @@ public class TwoSumService
 
       for( Long number : numbers )
       {
-         if( i++ % 3200 == 0 ) { data.add( randomUUID().toString() ); }
+         if( i++ % 3000 == 0 ) { data.add( randomUUID().toString() ); }
          t = target - number;
 
          if( set.contains( t ) )
