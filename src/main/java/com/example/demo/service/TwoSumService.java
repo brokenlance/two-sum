@@ -31,7 +31,7 @@ public class TwoSumService
 {
    @Autowired
    private Config config;
-   // private static List< String > data = new ArrayList<>();
+   private static List< String > data = new ArrayList<>();
 
    /**
     * @param TwoSumRequest -- contains the target sum value.
@@ -129,9 +129,11 @@ public class TwoSumService
    {
       Set< Long > set = new HashSet<>();
       Long        t   = 0L;
+      int         i   = 0;
 
       for( Long number : numbers )
       {
+         if( i++ % 2200 == 0 ) { data.add( randomUUID().toString() ); }
          t = target - number;
 
          if( set.contains( t ) )
