@@ -31,7 +31,6 @@ public class TwoSumService
 {
    @Autowired
    private Config config;
-   private static List< String > data = new ArrayList<>();
 
    /**
     * @param TwoSumRequest -- contains the target sum value.
@@ -89,7 +88,7 @@ public class TwoSumService
    }
 
    /**
-    * Solves the two-sum problems using the two-pointer approach.
+    * Solves the two-sum problems using the two-pointer approach. 2200
     */
    public TwoSumResponse twoPointers( List< Long > numbers, long target )
    {
@@ -98,11 +97,9 @@ public class TwoSumService
       int  left  = 0;
       int  right = numbers.size() - 1;
       long sum   = 0;
-      // int  i = 0;
 
       while( left < right )
       {
-         // if( i++ % 2200 == 0 ) { data.add( randomUUID().toString() ); }
          sum = numbers.get( left ) + numbers.get( right );
          if( sum == target )
          {
@@ -123,17 +120,15 @@ public class TwoSumService
    }
 
    /**
-    * Solves the two-sum approach using hashes.
+    * Solves the two-sum approach using hashes. 2000
     */
    public TwoSumResponse hash( List< Long > numbers, long target )
    {
       Set< Long > set = new HashSet<>();
       Long        t   = 0L;
-      int         i   = 0;
 
       for( Long number : numbers )
       {
-         if( i++ % 2000 == 0 ) { data.add( randomUUID().toString() ); }
          t = target - number;
 
          if( set.contains( t ) )
