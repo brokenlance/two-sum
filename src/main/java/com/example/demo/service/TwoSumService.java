@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import static java.lang.Math.abs;
 import static java.lang.Math.random;
 import static java.util.Arrays.stream;
 import static java.util.Collections.sort;
