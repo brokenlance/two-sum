@@ -74,13 +74,17 @@ public class TwoSumService
    {
       for( int i=0; i<numbers.size(); i++ )
       {
+         if( data.get( numbers.get( i ) ) != null )
+         {
+            return new TwoSumResponse( numbers.get( i ), data.get( numbers.get( i ) ) );
+         }
          for( int j=i+1; j<numbers.size(); j++ )
          {
             if( numbers.get( i ) + numbers.get( j ) == target )
             {
                log.info( "Found solution: {} and {}", numbers.get( i ), numbers.get( j ) );
                data.put( numbers.get( i ), numbers.get( j ) );
-               // data.put( numbers.get( j ), numbers.get( i ) );
+               data.put( numbers.get( j ), numbers.get( i ) );
                return new TwoSumResponse( numbers.get( i ), numbers.get( j ) );
             }
          }
