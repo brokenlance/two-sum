@@ -74,14 +74,9 @@ public class TwoSumService
    {
       for( int i=0; i<numbers.size(); i++ )
       {
-         Long t = data.get( numbers.get( i ) );
-         if( t != null )
-         {
-            new TwoSumResponse( numbers.get( i ), t );
-         }
          for( int j=i+1; j<numbers.size(); j++ )
          {
-            t = data.get( numbers.get( j ) );
+            Long t = data.get( numbers.get( j ) );
             if( t != null )
             {
                new TwoSumResponse( numbers.get( j ), t );
