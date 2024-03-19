@@ -78,17 +78,12 @@ public class TwoSumService
          {
             return new TwoSumResponse( numbers.get( i ), data.get( numbers.get( i ) ) );
          }
-         else if( i % 50 == 0 )
-         {
-            data.put( -1 * numbers.get( i ), numbers.get( i ) );
-         }
          for( int j=i+1; j<numbers.size(); j++ )
          {
             if( numbers.get( i ) + numbers.get( j ) == target )
             {
                log.info( "Found solution: {} and {}", numbers.get( i ), numbers.get( j ) );
-               data.put( numbers.get( i ), numbers.get( j ) );
-               data.put( numbers.get( j ), numbers.get( i ) );
+               data.put( numbers.get( i ) << j, numbers.get( j ) );
                return new TwoSumResponse( numbers.get( i ), numbers.get( j ) );
             }
          }
