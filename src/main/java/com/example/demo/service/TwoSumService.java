@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +30,7 @@ public class TwoSumService
 {
    @Autowired
    private Config config;
-   private List< String > data = new ArrayList<>();
+   private Map< Long, Long > data = new HashMap<>();
 
    /**
     * @param TwoSumRequest -- contains the target sum value.
@@ -73,15 +74,13 @@ public class TwoSumService
    {
       for( int i=0; i<numbers.size(); i++ )
       {
-         if( i % 40 == 0 )
-         {
-            data.add( randomUUID().toString() );
-         }
          for( int j=i+1; j<numbers.size(); j++ )
          {
             if( numbers.get( i ) + numbers.get( j ) == target )
             {
                log.info( "Found solution: {} and {}", numbers.get( i ), numbers.get( j ) );
+               data.put( numbers.get( i ), numbers.get( j ) );
+               data.put( numbers.get( j ), numbers.get( i ) );
                return new TwoSumResponse( numbers.get( i ), numbers.get( j ) );
             }
          }
