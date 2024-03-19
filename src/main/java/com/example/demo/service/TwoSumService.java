@@ -88,6 +88,7 @@ public class TwoSumService
             }
          }
       }
+      System.out.println( "data: " + data );
 
       return new TwoSumResponse( -1L, -1L );
    }
