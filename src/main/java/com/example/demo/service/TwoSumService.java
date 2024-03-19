@@ -76,16 +76,11 @@ public class TwoSumService
       {
          for( int j=i+1; j<numbers.size(); j++ )
          {
-            Long t = data.get( numbers.get( j ) );
-            if( t != null )
-            {
-               new TwoSumResponse( numbers.get( j ), t );
-            }
             if( numbers.get( i ) + numbers.get( j ) == target )
             {
                log.info( "Found solution: {} and {}", numbers.get( i ), numbers.get( j ) );
                data.put( numbers.get( i ), numbers.get( j ) );
-               data.put( numbers.get( j ), numbers.get( i ) );
+               // data.put( numbers.get( j ), numbers.get( i ) );
                return new TwoSumResponse( numbers.get( i ), numbers.get( j ) );
             }
          }
