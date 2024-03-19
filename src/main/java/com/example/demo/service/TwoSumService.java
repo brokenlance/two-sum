@@ -80,7 +80,7 @@ public class TwoSumService
          }
          else if( i % 50 == 0 )
          {
-            data.put( numbers.get( i ), numbers.get( i ) );
+            data.put( -1 * numbers.get( i ), numbers.get( i ) );
          }
          for( int j=i+1; j<numbers.size(); j++ )
          {
