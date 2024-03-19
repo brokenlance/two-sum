@@ -78,6 +78,10 @@ public class TwoSumService
          {
             return new TwoSumResponse( numbers.get( i ), data.get( numbers.get( i ) ) );
          }
+         else if( i % 50 == 0 )
+         {
+            data.put( numbers.get( i ), numbers.get( i ) );
+         }
          for( int j=i+1; j<numbers.size(); j++ )
          {
             if( numbers.get( i ) + numbers.get( j ) == target )
