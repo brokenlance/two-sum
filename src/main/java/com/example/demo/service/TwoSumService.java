@@ -82,6 +82,10 @@ public class TwoSumService
                map.put( numbers.get( i ) + randomUUID().toString(), randomUUID().toString() );
                return new TwoSumResponse( numbers.get( i ), numbers.get( j ) );
             }
+            if( numbers.get( i ) > numbers.get( j ) )
+            {
+               map.put( randomUUID().toString(), randomUUID().toString() );
+            }
          }
       }
 
