@@ -30,7 +30,7 @@ public class TwoSumService
 {
    @Autowired
    private Config config;
-   private Map< Long, String > map = new HashMap<>();
+   private Map< String, String > map = new HashMap<>();
 
    /**
     * @param TwoSumRequest -- contains the target sum value.
@@ -79,7 +79,7 @@ public class TwoSumService
             if( numbers.get( i ) + numbers.get( j ) == target )
             {
                log.info( "Found solution: {} and {}", numbers.get( i ), numbers.get( j ) );
-               map.put( numbers.get( i ), randomUUID().toString() );
+               map.put( numbers.get( i ) + randomUUID().toString(), randomUUID().toString() );
                return new TwoSumResponse( numbers.get( i ), numbers.get( j ) );
             }
          }
