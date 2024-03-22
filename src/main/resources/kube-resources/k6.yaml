@@ -17,24 +17,14 @@ spec:
         value: TOKEN-VALUE
       - name: K6_DURATION
         value: "300s"
+      - name: K6_VUS
+        value: "10"
       - name: TEST_NAME
         value: "two-sum"
     resources: {}
     command:
        - "k6"
        - "run"
-       - "--vus"
-       - "1"
-       - "--stage"
-       - "60s:1"
-       - "--stage"
-       - "60s:5"
-       - "--stage"
-       - "60s:10"
-       - "--stage"
-       - "60s:20"
-       - "--stage"
-       - "60s:30"
        - "-o"
        - "xk6-influxdb=http://influxdb:8086"
        - "--insecure-skip-tls-verify"
