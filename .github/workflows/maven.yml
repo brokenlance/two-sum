@@ -132,7 +132,7 @@ jobs:
       run: |
         echo "datestamp: ${DATESTAMP}"
         #export TEMPLATE='{"date":"%s", "mode":"training", "skip":"8000", "testName":"two-sum"}'
-        export TEMPLATE='{"date":"%s", "mode":"training", "skip":"200", "testName":"two-sum"}'
+        export TEMPLATE='{"date":"%s", "mode":"live", "skip":"200", "testName":"two-sum"}'
         echo "The template is: $TEMPLATE";
         export PAYLOAD=$(printf "$TEMPLATE" "$DATESTAMP")
         echo "The payload is: $PAYLOAD"

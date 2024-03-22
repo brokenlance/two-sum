@@ -16,7 +16,7 @@ spec:
       - name: K6_INFLUXDB_TOKEN
         value: TOKEN-VALUE
       - name: K6_VUS
-        value: "30"
+        value: "10"
       - name: K6_DURATION
         value: "300s"
       - name: TEST_NAME
