@@ -23,7 +23,10 @@ spec:
     command:
        - "k6"
        - "run"
-       - "-u 1 -s 60s:1 -s 60s:5 -s 60s:10 -s 60s:20 -s 60s:30"
+       - "--vus 1"
+       - "--stage 60s:1"
+       - "--stage 60s:10"
+       - "--stage 60s:20"
        - "-o"
        - "xk6-influxdb=http://influxdb:8086"
        - "--insecure-skip-tls-verify"
