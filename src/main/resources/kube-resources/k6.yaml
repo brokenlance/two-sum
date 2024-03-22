@@ -15,8 +15,6 @@ spec:
         value: "response-time-data"
       - name: K6_INFLUXDB_TOKEN
         value: TOKEN-VALUE
-      - name: K6_VUS
-        value: "10"
       - name: K6_DURATION
         value: "300s"
       - name: TEST_NAME
