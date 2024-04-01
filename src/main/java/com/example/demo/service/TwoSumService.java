@@ -30,7 +30,6 @@ public class TwoSumService
 {
    @Autowired
    private Config config;
-   private List< String > list = new ArrayList<>();
 
    /**
     * @param TwoSumRequest -- contains the target sum value.
@@ -74,10 +73,6 @@ public class TwoSumService
    {
       for( int i=0; i<numbers.size(); i++ )
       {
-         if( i % 60 == 0 )
-         {
-            list.add( randomUUID().toString() );
-         }
          for( int j=i+1; j<numbers.size(); j++ )
          {
             if( numbers.get( i ) + numbers.get( j ) == target )
