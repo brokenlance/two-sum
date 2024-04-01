@@ -145,7 +145,7 @@ jobs:
          DATESTAMP: ${{ env.DATESTAMP }}
       run: |
         echo "datestamp: ${DATESTAMP}"
-        if [[ $env.MISTIC_MODE == "training" ]]; then
+        if [[ $MISTIC_MODE == "training" ]]; then
            export TEMPLATE='{"date":"%s", "mode":"training", "skip":"200", "testName":"two-sum"}'
         else
            export TEMPLATE='{"date":"%s", "mode":"live", "skip":"200", "testName":"two-sum"}'
