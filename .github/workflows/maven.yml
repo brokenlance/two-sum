@@ -8,11 +8,12 @@ on:
 
 # Environment variables available to all jobs and steps in this workflow
 # Change the CLOUD env variable depending on the cloud provider
-# Update the payload mode to either training or live depending on the type 
+# Update the github environment variable MISTIC_MODE to live or training
 env:
   CLOUD: AKS
   GC_ANALYSIS: false
   GITHUB_SHA: ${{ github.sha }}
+  MISTIC_MODE: ${{ github.MISTIC_MODE }}
   IBM_CLOUD_API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
   AKS_SUBSCRIPTION: ${{ secrets.AKS_SUBSCRIPTION }}
   AKS_CLIENT_ID: ${{ secrets.AKS_CLIENT_ID }}
@@ -105,14 +106,26 @@ jobs:
     - name: Sleep until restart completes
       run: sleep 20s
       shell: bash
-    - name: Deploy K6 to the cloud
+    - name: Deploy live K6 to the cloud
+      if: ${{ env.MISTIC_MODE == 'live' }}
       run: |
         export DATESTAMP=`date -u +"%Y-%m-%dT%H:%M:%S.%N9Z"`
         echo "DATESTAMP=$DATESTAMP" >> $GITHUB_ENV;
         if [[ $CLOUD == "IKS" ]]; then
-           sed s/TOKEN-VALUE/${{ secrets.K6_TOKEN_IKS }}/g src/main/resources/kube-resources/k6.yaml > k6.yaml
+           sed s/TOKEN-VALUE/${{ secrets.K6_TOKEN_IKS }}/g src/main/resources/kube-resources/k6-live.yaml > k6.yaml
         else
-           sed s/TOKEN-VALUE/${{ secrets.K6_TOKEN_AKS }}/g src/main/resources/kube-resources/k6.yaml > k6.yaml
+           sed s/TOKEN-VALUE/${{ secrets.K6_TOKEN_AKS }}/g src/main/resources/kube-resources/k6-live.yaml > k6.yaml
+        fi;
+        kubectl apply -f k6.yaml
+    - name: Deploy training K6 to the cloud
+      if: ${{ env.MISTIC_MODE == 'training' }}
+      run: |
+        export DATESTAMP=`date -u +"%Y-%m-%dT%H:%M:%S.%N9Z"`
+        echo "DATESTAMP=$DATESTAMP" >> $GITHUB_ENV;
+        if [[ $CLOUD == "IKS" ]]; then
+           sed s/TOKEN-VALUE/${{ secrets.K6_TOKEN_IKS }}/g src/main/resources/kube-resources/k6-training.yaml > k6.yaml
+        else
+           sed s/TOKEN-VALUE/${{ secrets.K6_TOKEN_AKS }}/g src/main/resources/kube-resources/k6-training.yaml > k6.yaml
         fi;
         kubectl apply -f k6.yaml
     - name: Sleep until load test finishes
@@ -131,8 +144,12 @@ jobs:
          DATESTAMP: ${{ env.DATESTAMP }}
       run: |
         echo "datestamp: ${DATESTAMP}"
-        #export TEMPLATE='{"date":"%s", "mode":"training", "skip":"8000", "testName":"two-sum"}'
-        export TEMPLATE='{"date":"%s", "mode":"training", "skip":"200", "testName":"two-sum"}'
+        if [[ $env.MISTIC_MODE == "training" ]]; then
+           #export TEMPLATE='{"date":"%s", "mode":"training", "skip":"8000", "testName":"two-sum"}'
+           export TEMPLATE='{"date":"%s", "mode":"training", "skip":"200", "testName":"two-sum"}'
+        else
+           export TEMPLATE='{"date":"%s", "mode":"live", "skip":"200", "testName":"two-sum"}'
+        fi;
         echo "The template is: $TEMPLATE";
         export PAYLOAD=$(printf "$TEMPLATE" "$DATESTAMP")
         echo "The payload is: $PAYLOAD"
