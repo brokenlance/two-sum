@@ -172,4 +172,7 @@ jobs:
            echo $DIFF;
            docker container run --env GIT_DIFF="$DIFF" --env OPENAI_KEY="$AI_KEY" --env DIFFERENCE="$DIFF" --name node --rm brandonbenham/git-diff-analyzer
            exit 1;
+        else
+           echo "response time is NOT normal but ChatGPT analysis is disabled.";
+           exit 1;
         fi;
