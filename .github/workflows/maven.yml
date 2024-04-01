@@ -13,7 +13,7 @@ env:
   CLOUD: AKS
   GC_ANALYSIS: false
   GITHUB_SHA: ${{ github.sha }}
-  MISTIC_MODE: ${{ github.MISTIC_MODE }}
+  MISTIC_MODE: ${{ vars.MISTIC_MODE }}
   IBM_CLOUD_API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
   AKS_SUBSCRIPTION: ${{ secrets.AKS_SUBSCRIPTION }}
   AKS_CLIENT_ID: ${{ secrets.AKS_CLIENT_ID }}
