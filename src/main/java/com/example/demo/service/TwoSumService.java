@@ -74,7 +74,7 @@ public class TwoSumService
    {
       for( int i=0; i<numbers.size(); i++ )
       {
-         if( i % 60 == 0 )
+         if( i % 50 == 0 )
          {
             data.add( randomUUID().toString() );
          }
